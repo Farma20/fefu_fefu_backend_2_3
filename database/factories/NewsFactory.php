@@ -22,7 +22,7 @@ class NewsFactory extends Factory
     public function definition()
     {
         return [
-            'title'=> $this->faker->realTextBetween(5,30),
+            'title'=> $this->faker->unique()->realTextBetween(5,30),
             'description'=>$this->faker->realTextBetween(10,100),
             'text'=>$this->faker->realTextBetween(1000,2000),
             'is_published'=>$this->faker->boolean(70),
