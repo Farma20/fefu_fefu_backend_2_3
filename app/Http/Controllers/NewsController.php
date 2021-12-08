@@ -11,7 +11,7 @@ class NewsController extends Controller
         //создание пагинатора где в условиях написаны ограничения на вывод данных, а в пагинтор передается кол-во записей на странице
         $news_list = News::query()
             ->where([
-                ['is_published', 'true'],
+                ['is_published', true],
                 ['published_at', '<=', 'NOW']
             ])
             ->orderByDesc('published_at')
@@ -22,11 +22,13 @@ class NewsController extends Controller
     }
 
     public function getDetails(string $slug){
-        $news = News::query()->where([
-            ['slug',  $slug],
-            ['is_published', 'true'],
-            ['published_at', '<=', 'NOW']
-        ])->first();
+        $news = News::query()
+            ->where([
+                ['slug',  $slug],
+                ['is_published', true],
+                ['published_at', '<=', 'NOW']
+            ])
+            ->first();
 
         if($news === null)
             abort(404);
