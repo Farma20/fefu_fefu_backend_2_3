@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use \App\Http\Controllers\NewsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Маршрут для обработки страницы со списком новостей
+Route::get('/news', [NewsController::class, 'getList'])->name('news_list');
+
+//маршрут для обратботки страницы с отдельной новостью
+Route::get('/news/{slug}', [NewsController::class, 'getDetails'])->name('news_item');
