@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\NewsController;
 use \App\Http\Controllers\AppealController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,3 +27,4 @@ Route::get('/news/{slug}', [NewsController::class, 'getDetails'])->name('news_it
 
 //маршрут для обработки и отправки данных введенных пользователем
 Route::match(['get', 'post'], '/appeal', AppealController::class)->name('appeal');
+
