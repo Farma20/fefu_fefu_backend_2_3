@@ -17,6 +17,7 @@ class CreateAppealsTable extends Migration
         Schema::create('appeals', function (Blueprint $table) {
             $table->id();
             $table->string('name', 20);
+
             $table->string('surname', 40);
             $table->string('patronymic', 20)->nullable();
             $table->unsignedTinyInteger('age');

@@ -15,6 +15,7 @@ use phpDocumentor\Reflection\DocBlock\Tags\Property;
  * @Property string|null $email
  * @Property string $message
 */
+
 class Appeal extends Model
 {
     use HasFactory;

@@ -112,16 +112,19 @@
 
         <div>
             <label for="phone">Телефон</label>
+
             <input
                 class="border_f"
                 type="tel"
                 name="phone"
                 placeholder="Введите номер"
+
                 value="{{ old('phone') }}"
             />
             @error('phone')
                 <p class="error">{{$message ?? ''}}</p>
             @enderror
+
         </div>
 
         <div>
@@ -147,6 +150,7 @@
                 type="text"
                 name="message"
                 placeholder="Введите сообщение"
+
                 rows="6"
             >{{ old('message') }}</textarea>
 
