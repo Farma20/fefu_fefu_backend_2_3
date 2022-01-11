@@ -34,14 +34,12 @@
 </head>
 <body>
     <h2>Отправить сообщение</h2>
-    @if ($success)
+    @if (empty($errors))
         <h5 class="success">Сообщение успешно отправленно</h5>
     @endif
-    @if (isset($errors['contacts']))
-        <p class="error">Хотя бы одно поле контактных данных должно быть заполненно</p>
-    @endif
 
-    <form method="POST" action="{{route('appeal')}}">
+
+    <form method="post" action="{{route('appeal')}}">
         @csrf
         <div>
             <label for="name">Имя</label>
@@ -50,25 +48,80 @@
                 type="text"
                 name="name"
                 placeholder="Введите ваше имя"
-                value="{{request()->isMethod('post') ? old('name'):''}}"
-                maxlength="20"
-                size="20"
+                value="{{ old('name') }}"
             />
-            <p class="error">{{$errors['name'] ?? ''}}</p>
+            @error('name')
+                <p class="error">{{$message ?? ''}}</p>
+            @enderror
         </div>
 
         <div>
-            <label for="phone">Номер телефона</label>
+            <label for="surname">Фамилия</label>
+            <input
+                class="border_f"
+                type="text"
+                name="surname"
+                placeholder="Введите вашу фамилию"
+                value="{{ old('surname') }}"
+            />
+            @error('surname')
+                <p class="error">{{$message ?? ''}}</p>
+            @enderror
+        </div>
+
+        <div>
+            <label for="patronymic">Отчество</label>
+            <input
+                class="border_f"
+                type="text"
+                name="patronymic"
+                placeholder="Введите вашу фамилию"
+                value="{{ old('patronymic') }}"
+            />
+            @error('patronymic')
+                <p class="error">{{$message ?? ''}}</p>
+            @enderror
+        </div>
+
+        <div>
+            <label for="age">Возраст</label>
+            <input
+                class="border_f"
+                type="text"
+                name="age"
+                placeholder="Введите ваш возраст"
+                value="{{ old('age') }}"
+            />
+            @error('age')
+                <p class="error">{{$message ?? ''}}</p>
+            @enderror
+        </div>
+
+        <div>
+            <label for="gender">Пол</label>
+            <select class="border_f" name="gender">
+                @foreach(array_keys($genders) as $gender)
+                    <option value="{{$gender}}" {{old('gender') == $gender ? 'selected' : ''}}>{{$gender}}</option>
+                @endforeach
+            </select>
+
+            @error('gender')
+                <p class="error">{{$message ?? ''}}</p>
+            @enderror
+        </div>
+
+        <div>
+            <label for="phone">Телефон</label>
             <input
                 class="border_f"
                 type="tel"
                 name="phone"
                 placeholder="Введите номер"
-                value="{{request()->isMethod('POST') ? old('phone'):''}}"
-                maxlength="11"
-                size="11"
+                value="{{ old('phone') }}"
             />
-            <p class="error">{{$errors['phone'] ?? ''}}</p>
+            @error('phone')
+                <p class="error">{{$message ?? ''}}</p>
+            @enderror
         </div>
 
         <div>
@@ -78,11 +131,13 @@
                 type="email"
                 name="email"
                 placeholder="Введите почту"
-                value="{{request()->isMethod('POST')? old('email'):''}}"
+                value="{{ old('email') }}"
                 maxlength="100"
                 size="30"
             />
-            <p class="error">{{$errors['email'] ?? ''}}</p>
+            @error('email')
+                <p class="error">{{$message ?? ''}}</p>
+            @enderror
         </div>
 
         <div>
@@ -92,10 +147,12 @@
                 type="text"
                 name="message"
                 placeholder="Введите сообщение"
-                value="{{request()->isMethod('POST') ? old('message') : ''}}"
-                maxlength="100" rows="6"
-            ></textarea>
-            <p class="error">{{$errors['message'] ?? ''}}</p>
+                rows="6"
+            >{{ old('message') }}</textarea>
+
+            @error('message')
+                <p class="error">{{$message ?? ''}}</p>
+            @enderror
         </div>
 
         <input type="submit" value="Отправить"/>

@@ -26,3 +26,4 @@ Route::get('/news/{slug}', [NewsController::class, 'getDetails'])->name('news_it
 
 //маршрут для обработки и отправки данных введенных пользователем
 Route::match(['get', 'post'], '/appeal', AppealController::class)->name('appeal');
+
