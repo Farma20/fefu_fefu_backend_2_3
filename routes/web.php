@@ -25,6 +25,8 @@ Route::get('/news', [NewsController::class, 'getList'])->name('news_list');
 Route::get('/news/{slug}', [NewsController::class, 'getDetails'])->name('news_item');
 
 //маршрут для обработки и отправки данных введенных пользователем
+
 Route::get('/appeal', [AppealController::class, 'create'])->name('appeal');
 
 Route::post('/appeal/save', [AppealController::class, 'save'])->name('save_appeal');
+
